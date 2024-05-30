@@ -25,14 +25,9 @@ form.addEventListener("submit", async (e) => {
   const isValidName = (name) => /^[a-zA-Z]+$/.test(name);
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const isValidPhone = (phone) => /^\d{11}$/.test(phone);
-  const isValidPassword = (password) =>
-    /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/.test(password);
+  const isValidPassword = (password) => /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/.test(password);
 
-  if (
-    !isValidName(firstName) ||
-    !isValidName(lastName) ||
-    !isValidName(middleName)
-  ) {
+  if (!isValidName(firstName) || !isValidName(lastName) || !isValidName(middleName)) {
     message.innerText = "Please enter valid names (alphabetic characters only)";
     return;
   }
@@ -48,8 +43,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   if (!isValidPassword(password)) {
-    message.innerText =
-      "Password must be at least 8 characters long and contain letters and numbers";
+    message.innerText = "Password must be at least 8 characters long and contain letters and numbers";
     return;
   }
 
@@ -62,51 +56,47 @@ form.addEventListener("submit", async (e) => {
   submitButton.innerHTML = "Loading...";
 
   try {
-    const response = await fetch(
-      "https://onabooking-api.onrender.com/api/v1/auth/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          middleName,
-          userName,
-          email,
-          phoneNumber,
-          password,
-          role: "admin",
-        }),
-      }
-    );
+    const response = await fetch("https://onabooking-api.onrender.com/api/v1/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        middleName,
+        userName,
+        email,
+        phoneNumber,
+        password,
+        role: "user",
+      }),
+    });
 
     if (response.ok) {
-      // alert("Registration Successful");
-      showToast("Registration Successful")
+      showToast("Registration Successful, Please Login");
+      message.innerHTML = "Registration Successful, Please Login";
 
-      message.innerTextHTML = "Registration Successful";
-      window.location.href = "index.html";
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 4000);
     } else {
       const responseData = await response.json();
 
-      if (responseData) {
-        // alert(responseData?.message);
-        showToast(responseData?.message)
-        window.location.href = "index.html";
+      if (responseData && responseData.message) {
+        showToast(responseData.message);
+        message.innerText = responseData.message;
       } else {
-        showToast(responseData?.message)
-         message.innerText = "Registration failed. Please try again.";
+        showToast("Registration failed. Please try again.");
+        message.innerText = "Registration failed. Please try again.";
       }
     }
   } catch (error) {
     console.error("Error:", error);
 
     showToast("An error occurred. Please try again later");
-
-    // alert("An error occurred. Please try again later");
-
+    message.innerText = "An error occurred. Please try again later";
+  } finally {
     submitButton.disabled = false;
     submitButton.innerHTML = "Create an account";
   }
