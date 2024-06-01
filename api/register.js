@@ -22,35 +22,35 @@ form.addEventListener("submit", async (e) => {
     document.getElementById("registerToastText").textContent = message;
   }
 
-  const isValidName = (name) => /^[a-zA-Z]+$/.test(name);
-  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const isValidPhone = (phone) => /^\d{11}$/.test(phone);
-  const isValidPassword = (password) => /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/.test(password);
+  // const isValidName = (name) => /^[a-zA-Z]+$/.test(name);
+  // const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // const isValidPhone = (phone) => /^\d{11}$/.test(phone);
+  // const isValidPassword = (password) => /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/.test(password);
 
-  if (!isValidName(firstName) || !isValidName(lastName) || !isValidName(middleName)) {
-    message.innerText = "Please enter valid names (alphabetic characters only)";
-    return;
-  }
+  // if (!isValidName(firstName) || !isValidName(lastName) || !isValidName(middleName)) {
+  //   message.innerText = "Please enter valid names (alphabetic characters only)";
+  //   return;
+  // }
 
-  if (!isValidEmail(email)) {
-    message.innerText = "Please enter a valid email address";
-    return;
-  }
+  // if (!isValidEmail(email)) {
+  //   message.innerText = "Please enter a valid email address";
+  //   return;
+  // }
 
-  if (!isValidPhone(phoneNumber)) {
-    message.innerText = "Please enter a valid phone number (11 digits)";
-    return;
-  }
+  // if (!isValidPhone(phoneNumber)) {
+  //   message.innerText = "Please enter a valid phone number (11 digits)";
+  //   return;
+  // }
 
-  if (!isValidPassword(password)) {
-    message.innerText = "Password must be at least 8 characters long and contain letters and numbers";
-    return;
-  }
+  // if (!isValidPassword(password)) {
+  //   message.innerText = "Password must be at least 8 characters long and contain letters and numbers";
+  //   return;
+  // }
 
-  if (password !== confirmPassword) {
-    message.innerText = "Passwords do not match";
-    return;
-  }
+  // if (password !== confirmPassword) {
+  //   message.innerText = "Passwords do not match";
+  //   return;
+  // }
 
   submitButton.disabled = true;
   submitButton.innerHTML = "Loading...";
