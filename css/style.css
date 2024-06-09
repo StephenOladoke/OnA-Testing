@@ -4618,7 +4618,7 @@ blockquote.styled {
 #search_container {
   position: relative;
   height: 700px;
-  background: #4d536d url(../img/onaimages/26.JPG) no-repeat center top;
+/*   background: #4d536d url(../img/onaimages/26.JPG) no-repeat center top; */
   background-size: cover;
   color: #fff;
   width: 100%;
